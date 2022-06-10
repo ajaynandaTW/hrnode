@@ -1,5 +1,13 @@
 const router = require('express').Router()
 const userController = require('../Controller/userController')
+ 
+router.get('/alluser',((req,res)=>{
+    userController.allAdmin(req,res).then((result)=>{
+        res.status(200).json(result)
+    }).catch(err=>{
+        res.status(404).json(err)
+    })
+}))
 router.post('/', ((req, res) => {
     userController.userRegister(req, res).then((result) => {
         console.log(result);
@@ -9,7 +17,7 @@ router.post('/', ((req, res) => {
         res.status(404).json(err)
     })
 }))
-router.get('/userlogin', ((req, res) => {
+router.post('/userlogin', ((req, res) => {
     userController.userLogin(req, res).then((result) => {
         console.log(result)
         res.status(200).json({
@@ -23,34 +31,38 @@ router.get('/userlogin', ((req, res) => {
         res.status(404).json(err)
     })
 }))
-router.get('/otpsend', ((req, res) => {
+router.post('/otpsend', ((req, res) => {
     userController.otpSend(req, res).then((result) => {
-        res.status(200).json({ success: true,
-                             message: 'OTP Send to the Email',
-                             OTP:req.otp 
-                            })
+        res.status(200).json({
+            success: true,
+            message: 'OTP Send to the Email',
+            OTP: req.otp
+        })
     }).catch(err => {
         console.log(err)
         res.status(404).json(err)
     })
 }))
-router.get('/otpverify',((req,res)=>{
-        userController.otpVerification(req,res).then((result)=>{
-            res.status(200).json({Success:true,
-                                message:"otp verified"
-                            })
-        }).catch(err=>{
-            console.log(err);
-            res.status(404).json(err)
+router.post('/otpverify', ((req, res) => {
+    userController.otpVerification(req, res).then((result) => {
+        res.status(200).json({
+            Success: true,
+            message: "otp verified"
         })
+    }).catch(err => {
+        console.log(err);
+        res.status(404).json(err)
+    })
 }))
-router.get('/resetpassword',((req,res)=>{
-    userController.resetPassword(req,res).then((result)=>{
+router.post('/resetpassword', ((req, res) => {
+    userController.resetPassword(req, res).then((result) => {
         console.log(result)
-        res.status(200).json({Success:true,
-                            message:'Password has been reset',
-                            data:result})
-    }).catch(err=>{
+        res.status(200).json({
+            Success: true,
+            message: 'Password has been reset',
+            data: result
+        })
+    }).catch(err => {
         console.log(err);
         res.status(404).json(err)
     })

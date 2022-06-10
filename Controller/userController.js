@@ -22,6 +22,17 @@ const userRegister = ((req, res) => {
         })
     })
 })
+const allAdmin = ((req,res)=>{
+    return new Promise((resolve,reject)=>{
+        userdb.find().then((result)=>{
+            console.log(result);
+            resolve(result)
+        }).catch(err=>{
+            console.log(err);
+            reject(err)
+        })
+    })
+})
 const userLogin = ((req, res) => {
     return new Promise(async (resolve, reject) => {
         const user = await userdb.findOne({ Email: req.body.email })
@@ -114,4 +125,4 @@ const resetPassword = ((req, res) => {
         })
     })
 })
-module.exports = { userRegister, userLogin, otpSend, otpVerification, resetPassword }
+module.exports = { userRegister, userLogin, otpSend, otpVerification, resetPassword ,allAdmin }
