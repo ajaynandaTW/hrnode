@@ -1,5 +1,6 @@
 const listUsers = {
     tags:['Login'],
+    summary:"All user data",
     description:"Returns all user data",
     responses:{
         200:{
@@ -13,6 +14,7 @@ const listUsers = {
 }
 const loginUsers = {
     tags:["Login"],
+    summary:"User logins",
     description:"login credentials",
     requestBody:{
         content:{
@@ -47,6 +49,7 @@ const loginUsers = {
 }
 const otpSend = {
     tags:["Forgotpassword"],
+    summary:"OTP Sending to email",
     description:"Forgot Password otp sending to email",
     requestBody:{
         content:{
@@ -77,6 +80,7 @@ const otpSend = {
 }
 const otpVerify = {
     tags:["Forgotpassword"],
+    summary:"OTP Verification",
     description:"OTP Verification by Email",
     requestBody:{
         content:{
@@ -111,6 +115,7 @@ const otpVerify = {
 }
 const resetPassword = {
     tags:["Forgotpassword"],
+    summary:"ResetPassword",
     description:"Reset Password of user",
     requestBody:{
         content:{
@@ -147,11 +152,195 @@ const resetPassword = {
         }
     }
 }
+const empRegister={
+    tags:['EmployeeCRUD'],
+    summary:"RegisterEmployee",
+    description:"Register Employee",
+    requestBody:{
+        content:{
+            "application/json":{
+            schema:{
+                type:"object",
+                properties:{
+                    email:{
+                        type:"string",
+                        description:"enter email"
+                    },
+                    fname:{
+                        type:"string",
+                        description:"enter firstname"
+                    },
+                    lname:{
+                        type:"string",
+                        description:"Enter Lastname"
+                    },
+                    address:{
+                        type:"string",
+                        description:"Enter Full address"
+                    },
+                    phonenumber:{
+                        type:"string",
+                        description:"Enter Phone number"
+                    },
+                    designation:{
+                        type:"string",
+                        description:"Enter designation"
+                    },
+                    pincode:{
+                        type:"string",
+                        description:"Enter pincode"
+                    },
+
+                }
+            },
+        },
+           
+        }
+    },
+    responses:{
+        200:{
+            description:"Employee Registered Successfull",
+            content:{
+                "application/json":{
+
+                }
+            }
+        }
+    }
+}
+const empUpdate={
+    tags:['EmployeeCRUD'],
+    summary:"UpdateEmployee",
+    description:"Update Employee",
+    parameters:[{
+        name:'id',
+        in:'path',
+        description:"Enter the id of the employee",
+        required:true
+    }],
+    requestBody:{
+        content:{
+            "application/json":{
+            schema:{
+                type:"object",
+                properties:{
+                    email:{
+                        type:"string",
+                        description:"enter email"
+                    },
+                    fname:{
+                        type:"string",
+                        description:"enter firstname"
+                    },
+                    lname:{
+                        type:"string",
+                        description:"Enter Lastname"
+                    },
+                    address:{
+                        type:"string",
+                        description:"Enter Full address"
+                    },
+                    phonenumber:{
+                        type:"string",
+                        description:"Enter Phone number"
+                    },
+                    designation:{
+                        type:"string",
+                        description:"Enter designation"
+                    },
+                    pincode:{
+                        type:"string",
+                        description:"Enter pincode",    
+                    },
+                },
+              
+            },
+        },
+           
+        }
+    },
+    responses:{
+        200:{
+            description:"Employee Updated Successfull",
+            content:{
+                "application/json":{
+
+                }
+            }
+        }
+    }
+}
+const allEmployees={
+    tags:['EmployeeCRUD'],
+    summary:"AllEmployee",
+    description:"All Employee",
+    requestBody:{
+        200:{
+            content:{
+                "application/json":{
+              description:"List of all employess"        
+                },
+            },
+        }
+    },
+    responses:{
+        200:{
+            description:"Employee Updated Successfull",
+            content:{
+                "application/json":{
+
+                }
+            }
+        }
+    }
+}
+const statusUpdate={
+    tags:['EmployeeCRUD'],
+    summary:"Status Update",
+    description:" Status Updating of the  Employee",
+    parameters:[{
+        name:'id',
+        in:'path',
+        description:"Enter the id of the employee",
+        required:true
+    }],
+    responses:{
+        200:{
+            description:"Employee Status Updated Successfull",
+            content:{
+                "application/json":{
+
+                }
+            }
+        }
+    }
+}
+const empByID={
+    tags:['EmployeeCRUD'],
+    summary:"Employee By id",
+    description:"returns Employee By id",
+    parameters:[{
+        name:'id',
+        in:'path',
+        description:"Enter the id of the employee",
+        required:true
+    }],
+    responses:{
+        200:{
+            description:"Employee data fetched Successfully",
+            content:{
+                "application/json":{
+
+                }
+            }
+        }
+    }
+}
 const listroute = {
-    "/alluser":{
+    "/alladmin":{
         get:listUsers,
     },
-    "/userlogin":{
+    "/adminlogin":{
         post:loginUsers
     },
     "/otpsend":{
@@ -162,6 +351,21 @@ const listroute = {
     },
     "/resetpassword":{
         post:resetPassword
+    },
+    "/empregister":{
+        post:empRegister
+    },
+    '/update/{id}':{
+        put:empUpdate
+    },
+    '/allemp':{
+        get:allEmployees
+    },
+    '/statuschange/{id}':{
+        put:statusUpdate
+    },
+    "/employebyid/{id}":{
+        post:empByID
     }
 }
 module.exports =listroute

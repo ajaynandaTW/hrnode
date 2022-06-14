@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const userController = require('../Controller/userController')
  
-router.get('/alluser',((req,res)=>{
+router.get('/alladmin',((req,res)=>{
     userController.allAdmin(req,res).then((result)=>{
         res.status(200).json(result)
     }).catch(err=>{
@@ -17,7 +17,7 @@ router.post('/', ((req, res) => {
         res.status(404).json(err)
     })
 }))
-router.post('/userlogin', ((req, res) => {
+router.post('/adminlogin', ((req, res) => {
     userController.userLogin(req, res).then((result) => {
         console.log(result)
         res.status(200).json({

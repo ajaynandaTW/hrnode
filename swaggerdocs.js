@@ -18,6 +18,10 @@ const options ={
             {
                 name:"Forgotpassword",
                 description:"Forgt Password and reset Password by OTP"
+            },
+            {
+                name:"EmployeeCRUD",
+                description:"Employee CRUD operation and status updates"
             }
             ],
         paths:{
